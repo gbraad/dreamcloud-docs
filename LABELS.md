@@ -36,6 +36,7 @@ chef
 saltstack
 puppet
 dokku
+serverpilot
 
 tools
 ~~~~~
