@@ -53,7 +53,8 @@ variables can also be modified to deploy a different image or a different size
 server.
 
 Finally, connect to DreamCompute with Shade and request that the server we want
-be built.
+be built. For more information about Shade, read our documentation on how to
+use Shade with DreamCompute `here <214836997>`__.
 
 .. literalinclude:: examples/serverpilot.py
     :start-after: step-5
