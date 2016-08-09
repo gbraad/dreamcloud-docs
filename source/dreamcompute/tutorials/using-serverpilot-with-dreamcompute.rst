@@ -2,10 +2,10 @@
 Registering a DreamCompute server with ServerPilot using Shade
 ==============================================================
 
-This article assumes you have a clouds.yaml file that has the information on
-how to authenticate to your DreamCompute account. It also assumes that you
-already have an account on ServerPilot and have your client ID and API key for
-that account.
+This article assumes you have:
+* A clouds.yaml file that has the information on how to authenticate to your
+  DreamCompute account
+* An account on ServerPilot and your client ID and API key for that account
 
 Getting a server ID and server API key from ServerPilot
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -18,7 +18,7 @@ here.
     :start-after: step-1
     :end-before: step-2
 
-Next we make the reques to the ServerPilot API to create new a new server ID
+Next we make the request to the ServerPilot API to create new a new server ID
 and API key.
 
 .. literalinclude:: examples/serverpilot.py
