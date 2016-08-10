@@ -45,7 +45,7 @@ Etherpad and run it. To clone Etherpad using git, run:
 
 .. code:: bash
 
-    git clone git://github.com/ether/etherpad-lite.git
+    git clone git://github.com/ether/etherpad-lite.git /srv/etherpad-lite
 
 Configuration
 -------------
@@ -54,7 +54,7 @@ Networking
 ^^^^^^^^^^
 
 Now comes the configuration of Etherpad. By default it runs on port 9001.
-Change it to run on port 8080 by editing the settings.json file:
+Change it to run on port 8080 by editing /srv/etherpad-lite/settings.json:
 
 .. code:: bash
 
@@ -112,17 +112,50 @@ And add the configuration for MySQL:
 Your configuration may be a bit different depending on how you have MySQL
 configured, adjust the values accordingly.
 
-Starting Etherpad
-~~~~~~~~~~~~~~~~~
+Creating a systemd service
+~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Now that everything is configured, you can finally start Etherpad. I recommend
-running it inside screen or tmux so that it continues to run after you
-disconnect from the server.
+The best way to run Etherpad is to create a systemd service for it and create a
+user for it to run as. To create a systemd service copy the following into
+/etc/systemd/service/etherpad-lite.service.
+
+.. code:: None
+
+    [Unit]
+    Description=etherpad-lite (real-time collaborative document editing)
+    After=syslog.target network.target
+
+    [Service]
+    Type=simple
+    User=etherpad-lite
+    Group=etherpad-lite
+    ExecStart=/srv/etherpad-lite/bin/run.sh
+
+    [Install]
+    WantedBy=multi-user.target
+
+Next we need to create the user for etherpad-lite to run as.
 
 .. code:: bash
 
-    tmux
-    bin/run.sh
+    adduser --system --home=/srv/etherpad-lite --group etherpad-lite
+
+Now there is an ``etherpad-lite`` user, change the permissions of
+/srv/etherpad-lite so that it has access to the directory.
+
+.. code:: bash
+
+    chown -R etherpad-lite:etherpad-lite /srv/etherpad-lite
+
+Starting Etherpad
+~~~~~~~~~~~~~~~~~
+
+Finally start the service and set it to start at boot
+
+.. code:: bash
+
+    systemctl enable etherpad-lite
+    systemctl start etherpad-lite
 
 Etherpad is now running. Confirm it works by going to http://IP:8080. Make
 sure to replace "IP" with the IP address of your server.
