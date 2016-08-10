@@ -34,7 +34,7 @@ flavor_id = '100'
 key_name = 'KEY NAME GOES HERE'
 
 # step-5
-conn = shade.OpenStackCloud(cloud='iad2')
+conn = shade.OpenStackCloud()
 
 image = conn.get_image(image_name)
 conn.create_server(image=image, flavor=flavor_id,

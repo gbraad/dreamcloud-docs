@@ -2,10 +2,12 @@
 Registering a DreamCompute server with ServerPilot using Shade
 ==============================================================
 
-This article assumes you have:
-* A clouds.yaml file that has the information on how to authenticate to your
-  DreamCompute account
-* An account on ServerPilot and your client ID and API key for that account
+This article assumes you have
+* An account on ServerPilot and your `client ID and API key
+  <https://serverpilot.io/community/articles/how-to-use-the-serverpilot-api.html>`__
+  for that account.
+* An `openrc.sh file
+  <https://iad2.dreamcompute.com/project/access_and_security/api_access/openrc/>`__
 
 Getting a server ID and server API key from ServerPilot
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -34,13 +36,22 @@ Launching a server and registering it with ServerPilot
 
 Next we launch the server and run the ServerPilot installer on it.
 
-First we must pass the ServerPilot to the server to run at creation
+In order to do this Shade needs to know how to authenticate to DreamCompute:
+
+.. code:: bash
+
+    source openrc.sh
+
+This sets some environment variables that tell Shade how to authenticate to
+DreamCompute.
+
+Next we must pass the ServerPilot installer to the server to run at creation
 
 .. literalinclude:: examples/serverpilot.py
     :start-after: step-3
     :end-before: step-4
 
-Next set variables for the image, flavor, and key pair to launch the server
+Then set variables for the image, flavor, and key pair to launch the server
 with.
 
 .. literalinclude:: examples/serverpilot.py
@@ -59,7 +70,7 @@ use Shade with DreamCompute <214836997>`__.
 .. literalinclude:: examples/serverpilot.py
     :start-after: step-5
 
-Once the script runs and finishes, go to ServerPilot.com, click on servers
+Once the script runs and finishes, go to ServerPilot.io, click on servers
 and you should see your new server (it may take up to a couple minutes for the
 installation script to finish). You can now use ServerPilot to manage your
 server and deploy applications on it.
